@@ -138,7 +138,12 @@ def draw_main_graph(
             alpha=0.3,
             label=s_qorc_output_size_name + "=" + str(size),
         )
-    plt.legend(bbox_to_anchor=(1.05, 0.9), loc="upper left", title="Disk Size", labelspacing=2.7)
+    plt.legend(
+        bbox_to_anchor=(1.05, 0.9),
+        loc="upper left",
+        title="Disk Size",
+        labelspacing=2.7,
+    )
 
     plt.tight_layout()
 

@@ -5,7 +5,6 @@
 - Paper: Quantum optical reservoir computing powered by boson sampling (Optica Quantum, 2025)
 - Authors: Akitada Sakurai, Aoi Hayashi, William John Munro, Kae Nemoto
 - DOI/ArXiv: https://doi.org/10.1364/OPTICAQ.541432, https://opg.optica.org/opticaq/abstract.cfm?URI=opticaq-3-3-238
-- License and attribution notes:
 
 ## Overview
 
@@ -163,7 +162,7 @@ Place configuration files in `configs/`.
 - **Looping Support**: Some parameters can be provided as lists (e.g., `n_photons`, `n_modes`, `seed`, `fold_index`, `n_rff_features`). In such cases, the script will automatically loop over all provided values **in a grid-search manner**.
 
 
-## Results and Analysis
+## Results
 
 Main graph exposing quantum reservoir performances (test accuracy) on MNIST.
 
