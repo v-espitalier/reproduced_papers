@@ -224,7 +224,7 @@ def train_and_evaluate(cfg, run_dir: Path) -> None:
             or isinstance(fold_index, List)
             or isinstance(seed, List)
         ):
-            logger.info("Entering loop training over fold/seed/photons/modes:")
+            logger.info("Entering loop training over photons/modes/fold/seed:")
             f_out_results_training_csv = cfg["f_out_results_training_csv"]
             assert len(f_out_results_training_csv) > 0, (
                 "Error: Empty f_out_results_training_csv"
@@ -366,8 +366,8 @@ def train_and_evaluate(cfg, run_dir: Path) -> None:
         n_rff_features = cfg["n_rff_features"]
         seed = cfg["seed"]
 
-        if isinstance(seed, List) or isinstance(n_rff_features, List):
-            logger.info("Entering loop training over seed/n_rff_features:")
+        if isinstance(n_rff_features, List) or isinstance(seed, List):
+            logger.info("Entering loop training over n_rff_features/seed:")
             f_out_results_training_csv = cfg["f_out_results_training_csv"]
             assert len(f_out_results_training_csv) > 0, (
                 "Error: Empty f_out_results_training_csv"
@@ -439,6 +439,7 @@ def train_and_evaluate(cfg, run_dir: Path) -> None:
                     logger.info("Written file: %s", f_out_results_training_csv)
 
         else:
+            # Single run
             outputs = rff_encoding_and_linear_training(
                 # Main parameters
                 n_rff_features=cfg["n_rff_features"],

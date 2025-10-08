@@ -46,7 +46,13 @@ This repository provides a reproducible implementation of the **quantum reservoi
 - **Circuit Design**: Pre-circuit and reservoir share the same Haar-random unitary matrix, as in the original paper.
 - **Determinism**: Fully deterministic when `seed > 0`. Random behavior if `seed=-1`.
 
+## Concept
 
+**Quantum Optical Reservoir Computing (QORC)** leverages the intrinsic non-linearity of photonic circuits to compute high-dimensional, untrained features. A trainable linear layer is then applied to these features to perform image classification.
+
+![Qorc scheme](qorc.png)
+
+In detail, an **M-mode random interferometer** (pre-circuit) with **N single-photon inputs** generates a complex photonic resource state. Each input image undergoes **dimensionality reduction via Principal Component Analysis (PCA)**, and the resulting feature vector modulates the phases of a column of phase shifters, encoding the data into the photonic state. The encoded state is subsequently processed through a second **M-mode random interferometer** (the reservoir), which may be identical to the pre-circuit. The output **Fock-state probabilities**, obtained via coincidence detection, serve as quantum-derived features for classification.
 
 ## How to Run
 
@@ -163,7 +169,7 @@ Main graph exposing quantum reservoir performances (test accuracy) on MNIST.
 
 ![MNIST quantum reservoir performances](results/main_graph.png)
 
-In the precedent graph, bunching was manually disabled when the condition `n_photons * n_photons < n_modes` was met, to ensure more precise calculations.
+In the precedent graph, bunching was manually disabled when the condition `n_photons * n_photons < n_modes` was met, to ensure more precise calculations. The results obtained are comparable to those reported in the reference paper.
 
 Graph comparing the quantum reservoir computing (QRC) method with the classical Random Fourier Features (RFF) method, a fast approximation of the Radial Basis Function (RBF) kernel. For the QRC, the number of photons is fixed at 3, as specified in the reference paper.
 
@@ -195,8 +201,4 @@ torch==2.7.1
 perceval_quandela==0.13.2
 merlinquantum==0.1.0
 ```
-
-
-
-## Testing
 
