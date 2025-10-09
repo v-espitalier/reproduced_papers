@@ -8,7 +8,7 @@
 
 ## Overview
 
-This repository provides a reproducible implementation of the **quantum reservoir computing (QRC) experiment** using the **MerLin quantum machine learning framework**. The code replicates the performance results of quantum feature-based classification on the **MNIST dataset**, demonstrating the proof-of-concept advantages of quantum reservoirs in machine learning tasks.
+This repository provides a reproducible implementation of the **Quantum Optical Reservoir Computing (QORC) experiment** using the **MerLin quantum machine learning framework**. The code replicates the performance results of quantum feature-based classification on the **MNIST dataset**, demonstrating the proof-of-concept advantages of quantum reservoirs in machine learning tasks.
 
 ### Key Components
 - **Dataset**: Classic MNIST (10-class image classification, 28x28 pixels, 60,000 training + 10,000 test images).
@@ -170,7 +170,7 @@ Main graph exposing quantum reservoir performances (test accuracy) on MNIST.
 
 In the precedent graph, bunching was manually disabled when the condition `n_photons * n_photons < n_modes` was met, to ensure more precise calculations. The results obtained are comparable to those reported in the reference paper.
 
-Graph comparing the quantum reservoir computing (QRC) method with the classical Random Fourier Features (RFF) method, a fast approximation of the Radial Basis Function (RBF) kernel. For the QRC, the number of photons is fixed at 3, as specified in the reference paper.
+Graph comparing the quantum optical reservoir computing (QORC) method with the classical Random Fourier Features (RFF) method, a fast approximation of the Radial Basis Function (RBF) kernel. For the QORC, the number of photons is fixed at 3, as specified in the reference paper.
 
 ![MNIST quantum reservoir versus RFF](results/graph_qorc_vs_rff.png)
 
