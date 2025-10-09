@@ -41,15 +41,15 @@ def draw_main_graph(
     y_min,
     y_max,
     f_out_img,
+    b_short_names,
 ):
     df = pd.read_csv(f_in_aggregated_results_csv)
 
-    disk_size_ratio = 0.3
+    disk_size_ratio = 0.25
     legend_disk_size_list = [800, 1600, 2400, 3200, 4000, 4800]
     figsize = (figsize_list[0], figsize_list[1])
 
     colors = plt.cm.tab10.colors
-    s_qorc_output_size_name = "qorc_output_size"
 
     # Compute avg and StDev per couple (n_photons, n_modes)
     grouped = (
@@ -78,7 +78,9 @@ def draw_main_graph(
                 yerr=subset["std_train_acc"],
                 marker=marker,
                 color=color,
-                label=f"Train Acc (n_photons={n_photon})",
+                label=f"n_photons={n_photon}"
+                if b_short_names
+                else f"Train Acc (n_photons={n_photon})",
                 linestyle="-",
                 capsize=5,
             )
@@ -95,7 +97,9 @@ def draw_main_graph(
                 yerr=subset["std_test_acc"],
                 marker=marker,
                 color=color,
-                label=f"Test Acc (n_photons={n_photon})",
+                label=f"n_photons={n_photon}"
+                if b_short_names
+                else f"Test Acc (n_photons={n_photon})",
                 linestyle="--",
                 capsize=5,
             )
@@ -118,6 +122,8 @@ def draw_main_graph(
     plt.xlabel("n_modes (log scale)")
     plt.ylabel("Accuracy")
     s_title = "Accuracy vs n_modes"
+    if b_short_names:
+        s_title = "Accuracy"
     if b_test_acc:
         s_title = "Test " + s_title
     if b_train_acc:
@@ -136,12 +142,12 @@ def draw_main_graph(
             s=size * disk_size_ratio,
             color="gray",
             alpha=0.3,
-            label=s_qorc_output_size_name + "=" + str(size),
+            label=str(size),
         )
     plt.legend(
         bbox_to_anchor=(1.05, 0.9),
         loc="upper left",
-        title="Disk Size",
+        title="QORC output size",
         labelspacing=2.7,
     )
 
@@ -177,6 +183,9 @@ if __name__ == "__main__":
     [x_min, x_max] = [9.2, 220.0]
     [y_min, y_max] = [0.92, 1.0]
 
+    # b_short_names = False
+    b_short_names = True
+
     draw_main_graph(
         f_in_aggregated_results_csv,
         figsize_list,
@@ -187,4 +196,5 @@ if __name__ == "__main__":
         y_min,
         y_max,
         f_out_img,
+        b_short_names,
     )

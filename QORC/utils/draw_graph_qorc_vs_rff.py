@@ -39,6 +39,7 @@ def draw_graph_qorc_vs_rff(
     b_train_acc,
     b_test_acc,
     f_out_img,
+    b_short_names,
 ):
     df_qorc = pd.read_csv(f_in_qorc_aggregated_results_csv)
     df_rff = pd.read_csv(f_in_rff_aggregated_results_csv)
@@ -91,7 +92,7 @@ def draw_graph_qorc_vs_rff(
             grouped_qorc["n_features"],
             grouped_qorc["mean_train_acc"],
             yerr=grouped_qorc["std_train_acc"],
-            label="Train Acc QORC",
+            label="QORC" if b_short_names else "Train Acc QORC",
             marker="o",
             linestyle="-",
             capsize=5,
@@ -101,7 +102,7 @@ def draw_graph_qorc_vs_rff(
             grouped_qorc["n_features"],
             grouped_qorc["mean_test_acc"],
             yerr=grouped_qorc["std_test_acc"],
-            label="Test Acc QORC",
+            label="QORC" if b_short_names else "Test Acc QORC",
             marker="o",
             linestyle="--",
             capsize=5,
@@ -113,7 +114,7 @@ def draw_graph_qorc_vs_rff(
             grouped_rff["n_features"],
             grouped_rff["mean_train_acc"],
             yerr=grouped_rff["std_train_acc"],
-            label="Train Acc RFF",
+            label="RFF" if b_short_names else "Train Acc RFF",
             marker="s",
             linestyle="-",
             capsize=5,
@@ -123,7 +124,7 @@ def draw_graph_qorc_vs_rff(
             grouped_rff["n_features"],
             grouped_rff["mean_test_acc"],
             yerr=grouped_rff["std_test_acc"],
-            label="Test Acc RFF",
+            label="RFF" if b_short_names else "Test Acc RFF",
             marker="s",
             linestyle="--",
             capsize=5,
@@ -132,6 +133,8 @@ def draw_graph_qorc_vs_rff(
     plt.xlabel("n_features")
     plt.ylabel("Accuracy")
     s_title = "Accuracy vs n_features"
+    if b_short_names:
+        s_title = "Accuracy"
     if b_test_acc:
         s_title = "Test " + s_title
     if b_train_acc:
@@ -172,6 +175,9 @@ if __name__ == "__main__":
     # b_test_acc = False
     b_test_acc = True
 
+    # b_short_names = False
+    b_short_names = True
+
     draw_graph_qorc_vs_rff(
         f_in_qorc_aggregated_results_csv,
         f_in_rff_aggregated_results_csv,
@@ -180,4 +186,5 @@ if __name__ == "__main__":
         b_train_acc,
         b_test_acc,
         f_out_img,
+        b_short_names,
     )
